@@ -1,1 +1,1 @@
-Hey hi hello - Welcome to Pixel Learning Co. This is a test of Amazon Polly converting text to audio automatically.
+Hey hi hello how's it going - Welcome to Pixel Learning Co. This is a test of Amazon Polly converting text to audio automatically.
