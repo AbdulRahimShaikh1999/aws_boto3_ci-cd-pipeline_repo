@@ -1,0 +1,32 @@
+name: Polly Audio - Beta
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  beta_audio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install boto3
+
+      - name: Run synthesize script
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          echo "Overriding S3 key to beta.mp3"
+          sed -i "s|polly-audio/output.mp3|polly-audio/beta.mp3|g" synthesize.py
+          python3 synthesize.py
